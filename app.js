@@ -99,10 +99,10 @@ const MongoDBStore = require('connect-mongo')(session);
 // Setting this string to a variable so we can use it to connect
 // mongoose to our db later and to use it with connect-mongo in order
 // to store our session in mongodb
-const dbUrl = 'mongodb://localhost:27017/yelp-camp';
+//const dbUrl = 'mongodb://localhost:27017/yelp-camp';
 
-// This is our our db URL in Mongo Atlas
-// const dbUrl = process.env.DB_URL;
+// This is our our db URL in Mongo Atlas.
+const dbUrl = process.env.DB_URL;
 
 // Connecting mongoose to our MongoDB database: "yelp-camp"
 mongoose.connect(dbUrl, {
