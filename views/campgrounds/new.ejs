@@ -1,0 +1,65 @@
+<% layout("layouts/boilerplate") %>
+
+<!-- A note on this html file: we are using name="campground[variable]"
+    because then when we submit, each input is saved to that variable
+    in our database. If we did not do this, titles, locations, etc.
+    would not save to our collection in MongoDB.-->
+
+<!-- This form is going to go to the "/campgrounds" page and send a 
+    POST request to that page. -->
+<div class="row">
+    <h1 class="text-center mb-4">New Campground</h1>
+    <!-- We don't want this <div> in the middle of the page so
+            we're offsetting it by 3. -->
+    <div class="col-md-6 offset-md-3">
+        <div class="card shadow">
+        <div class="card-body">
+        <!-- Here we have to tell the browser not to use it's built-in 
+            form validation handling with "novalidate" so we can use 
+            bootstrap to create our own, prettier, more user-friendly
+            validation.
+        
+            Also, the enctype attribute specifies how the form-data should
+            be encoded when submitting it to the server. This attribute can
+            only be used if method="POST" we changed the enctype so that we
+            can upload files in or html form. -->
+        <form action="/campgrounds" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label class="form-label" for="title">Title</label>
+                <input class="form-control" type="text" id="title" name="campground[title]" required>
+                <div class="valid-feedback">Name added</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="location">Location</label>
+                <input class="form-control" type="text" id="location" name="campground[location]" required>
+                <div class="valid-feedback">Location added</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="price">Campground Price</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">$</span>
+                    <!-- area-describedby makes it clear to screenreaders that the price label describes this input -->
+                    <input type="text" placeholder="0.00" class="form-control" id="price" name="campground[price]"
+                        aria-describedby="price-label" required>
+                    <div class="valid-feedback">Price added</div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="description">Description</label>
+                <textarea class="form-control" type="text" id="description" name="campground[description]"
+                    required></textarea>
+                <div class="valid-feedback">Description added</div>
+            </div>
+            <div class="mb-4">
+                <label for="image" class="form-label">Image(s)</label>
+                <input class="form-control" type="file" id="image" name="image" multiple>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-success">Add Campground</button>
+            </div>
+        </form>
+        <a href="/campgrounds">All Campgrounds</a>
+        </div>
+        </div>
+    </div>
+</div>

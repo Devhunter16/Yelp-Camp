@@ -1,0 +1,11 @@
+/* For map on "All Campgrounds" page */
+#cluster-map {
+    width: 100%;
+    height: 500px;
+}
+
+/* For map on "Show Campground" page */
+#map {
+    width: 100%;
+    height : 300px;
+}

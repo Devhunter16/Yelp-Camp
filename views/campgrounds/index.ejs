@@ -1,0 +1,45 @@
+<% layout("layouts/boilerplate") %>
+
+<!-- This runs first as ejs, then we can access these variables in
+the script at the bottom of the page so we can display the map. -->
+<script>
+    const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+    // Mapbox will only recognize our array of campgrounds if it is
+    // set as the key to the value "features"
+    const campgrounds = {features: <%- JSON.stringify(campgrounds) %>};
+</script>
+
+<div id="cluster-map" class="mb-4"></div>
+<h1 class="mb-4">All Campgrounds</h1>
+<% for (let campground of campgrounds) { %>
+<div class="card mb-3">
+    <div class="row">
+        <div class="col-md-4">
+            <% if(campground.images.length) { %>
+            <img class="img-fluid" alt="" src="<%=campground.images[0].url%>" crossorigin>
+            <% } else { %>
+            <img class="img-fluid" alt=""
+                src="https://res.cloudinary.com/dp2jeiurf/image/upload/v1668972176/YelpCamp/st0q4ybr35duhxsujmap.jpg" crossorigin>
+            <% } %>
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title mb-3">
+                    <%= campground.title %>
+                </h5>
+                <p class="card-text mb-3">
+                    <%= campground.description %>
+                </p>
+                <p class="card-text mb-4">
+                    <%= campground.location %>
+                </p>
+                <a href="/campgrounds/<%= campground._id %>" class="btn btn-primary">View <%= campground.title
+                                %></a>
+            </div>
+        </div>
+    </div>
+</div>
+<% } %>
+
+<script src="/javascripts/clusterMap.js">
+</script>

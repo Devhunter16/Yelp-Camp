@@ -1,0 +1,29 @@
+<!-- If variable "success" exists in local variables (you can find out if a page has access
+to it by looking in the route) and if "success" is not empty ("success"
+is an array, we check this by checking whether or not "success" has a 
+length). -->
+<% if(success && success.length) { %>
+<!-- role="alert" is for screen reader accessibility -->
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <!-- We have access to the "success" variable because of our
+    flash middleware -->
+    <%= success %>
+    <!-- closeout button -->
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<% } %>
+
+<!-- If variable "error" exists in local variables (you can find out if a page has access
+to it by looking in the route) and if "error" is not empty ("error"
+is an array, we check this by checking whether or not "error" has a 
+length) -->
+<% if(error && error.length) { %>
+<!-- role="alert" is for screen reader accessibility -->
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <!-- We have access to the "error" variable because of our
+        flash middleware -->
+    <%= error %>
+    <!-- closeout button -->
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<% } %>

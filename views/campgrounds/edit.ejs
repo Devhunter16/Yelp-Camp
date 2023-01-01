@@ -1,0 +1,67 @@
+<% layout("layouts/boilerplate") %>
+
+<div class="row">
+    <h1 class="text-center mb-4">Edit Campground</h1>
+    <!-- This form is going to go to the "/campgrounds/:id" 
+        page and send a PUT request to that page. We are using
+        method-override here.
+
+        Also, the enctype attribute specifies how the form-data should
+        be encoded when submitting it to the server. This attribute can
+        only be used if method="POST" we changed the enctype so that we
+        can upload files in our html form -->
+        <div class="col-md-6 offset-md-3">
+        <div class="card shadow">
+        <div class="card-body">
+        <form action="/campgrounds/<%=campground._id%>?_method=PUT" method="POST" novalidate class="validated-form"
+            enctype="multipart/form-data">
+            <div class="mb-3">
+                <label class="form-label" for="title">Title</label>
+                <input class="form-control" type="text" id="title" name="campground[title]"
+                    value="<%=campground.title%>" required>
+                <div class="valid-feedback">Name added</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="location">Location</label>
+                <input class="form-control" type="text" id="location" name="campground[location]"
+                    value="<%=campground.location%>" required>
+                <div class="valid-feedback">Location added</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="price">Campground Price</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">$</span>
+                    <!-- area-describedby makes it clear to screenreaders that the price label describes this input -->
+                    <input type="text" placeholder="<%=campground.price%>" class="form-control" id="price"
+                        name="campground[price]" aria-describedby="price-label" value="<%=campground.price%>" required>
+                    <div class="valid-feedback">Price added</div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="description">Description</label>
+                <textarea class="form-control" type="text" id="description" name="campground[description]"
+                    required><%=campground.description%></textarea>
+                <div class="valid-feedback">Description added</div>
+            </div>
+            <div class="mb-4">
+                <label for="image" class="form-label">Add More Image(s)</label>
+                <input class="form-control" type="file" id="image" name="image" multiple>
+            </div>
+            <div class="mb-3">
+                <% campground.images.forEach(function(img, i) { %>
+                <img class="img-thumbnail" src="<%= img.thumbnail %>" alt="" crossorigin>
+                <div class="form-check-inline">
+                    <input type="checkbox" id="image-<%= i %>" name="deleteImages[]" value="<%= img.filename %>">
+                </div>
+                <label for="">Delete?</label>
+                <% }); %>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-info">Update Campground</button>
+            </div>
+        </form>
+        <a href="/campgrounds">Back to Campgrounds</a>
+    </div>
+    </div>
+    </div>
+</div>
